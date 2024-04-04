@@ -15,6 +15,6 @@
 % 44  xenon-cray-blue2
 
 plot(w, R(:,5), w, R(:,18), w, R(:,30), w, R(:,43), w, R(:,44))
-legend(measurement{5}, measurement{18}, measurement{30}, measurement{43}, measurement{44}, 'Location', 'northwest', 'FontSize', 24)
+legend(measurement{5}, measurement{18}, measurement{30}, measurement{43}, measurement{44}, 'Location', 'northwest')
 
 %% These are all pretty close **except** for the xenon-cray-blue2, which looks wrong. So let's not use that color.

@@ -14,6 +14,6 @@
 % 46 xenon
 
 plot(w, R(:,7), w, R(:,20), w, R(:,31), w, R(:,46))
-legend(measurement{7}, measurement{20}, measurement{31},measurement{46}, 'Location', 'northwest', 'FontSize', 24)
+legend(measurement{7}, measurement{20}, measurement{31},measurement{46}, 'Location', 'northwest')
 
 %% All look pretty good!

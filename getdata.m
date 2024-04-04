@@ -60,11 +60,11 @@ end
 %% Let's plot them:
 
 plot(w, Mi(:,60), w, Mi(:,61), w, Mi(:,62), w, Mi(:,63), 'LineWidth', 2);
-xlabel('Wavelength (nm)', 'FontSize', 24);
-ylabel('Intensity', 'FontSize', 24);
-title('Light sources reflected by paper', 'FontSize', 24);
-set(gca, 'FontSize', 24);
-legend(measurement{60:63}, 'northwest', 'FontSize', 24)
+xlabel('Wavelength (nm)');
+ylabel('Intensity');
+title('Light sources reflected by paper');
+set(gca);
+legend(measurement{60:63}, 'northwest')
 
 
 %% Note 3: Let's look at all the colors we measured under one light source, the xenon lamp.
