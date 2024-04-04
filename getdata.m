@@ -16,7 +16,7 @@ else
   % character string vectors in Matlab use the {} brackets
   % (numeric vectors use []) -- this is irritating!
   % These are all the measurements we made in class:
-  measurement = {"GrowLight-artminds-blue", "GrowLight-artminds-red", "GrowLight-artminds-yellow", "GrowLight-black", "GrowLight-crayola-blue", "GrowLight-crayola-red", "GrowLight-crayola-yellow", "GrowLight-green", "GrowLight-paper", "GrowLight-pink", "GrowLight-purple", "GrowLight-purple2", "GrowLight-white", "incandescent-artminds-blue", "incandescent-artminds-red", "incandescent-artmminds-yellow", "incandescent-black", "incandescent-crayola-blue", "incandescent-crayola-red", "incandescent-crayola-yellow", "incandescent-green", "incandescent-paper", "incandescent-pink", "incandescent-purple", "incandescent-white", "LED-artminds-blur", "LED-artminds-red", "LED-artminds-yellow", "LED-black", "LED-crayola-blue", "LED-crayola-yellow", "LED-cray-red", "LED-green", "LED-paper", "LED-pink", "LED-purple", "LED-white", "LED-white2", "xenon-artminds-blue", "xenon-artminds-red", "xenon-ArtMinds-yellow", "xenon-black", "xenon-cray-blue", "xenon-cray-blue2", "xenon-crayred", "xenon-crayyellow", "xenon-green", "xenon-paper", "xenon-pink", "xenon-purple", "xenon-target-green", "xenon-target-orangish", "xenon-target-orangish2", "xenon-target-pinkish", "xenon-target-purplish", "xenon-target-purplish2", "xenon-target-rocketred", "xenon-target-yellow", "xenon-white", "GrowLight", "incandescent", "LED", "xenon"};
+  measurement = {"GrowLight-artminds-blue", "GrowLight-artminds-red", "GrowLight-artminds-yellow", "GrowLight-black", "GrowLight-crayola-blue", "GrowLight-crayola-red", "GrowLight-crayola-yellow", "GrowLight-green", "GrowLight-paper", "GrowLight-pink", "GrowLight-purple", "GrowLight-purple2", "GrowLight-white", "incandescent-artminds-blue", "incandescent-artminds-red", "incandescent-artmminds-yellow", "incandescent-black", "incandescent-crayola-blue", "incandescent-crayola-red", "incandescent-crayola-yellow", "incandescent-green", "incandescent-paper", "incandescent-pink", "incandescent-purple", "incandescent-white", "LED-artminds-blur", "LED-artminds-red", "LED-artminds-yellow", "LED-black", "LED-crayola-blue", "LED-crayola-yellow", "LED-cray-red", "LED-green", "LED-paper", "LED-pink", "LED-purple", "LED-white", "LED-white2", "xenon-artminds-blue", "xenon-artminds-red", "xenon-ArtMinds-yellow", "xenon-black", "xenon-cray-blue", "xenon-cray-blue2", "xenon-crayred", "xenon-crayyellow", "xenon-green", "xenon-paper", "xenon-pink", "xenon-purple", "xenon-target-green", "xenon-target-orangish", "xenon-target-orangish2", "xenon-target-pinkish", "xenon-target-purplish", "xenon-target-purplish2", "xenon-target-rocketred", "xenon-target-yellow", "xenon-white", "GrowLight", "incandescent", "LED", "xenon", "GrowLight-white", "incandescent-white", "LED-white", "xenon-white"};
   url = "https://raw.githubusercontent.com/bwlewis/colors/main/2024-april-2-experiments/";
   % the spectrophotometer wavelenghts are the same for all measurements...
   wavelengths = readcolor(strcat(url, measurement{1}));   %% MATLAB is very dumb here, one can't apply (1,:) to this...
@@ -102,9 +102,10 @@ end
 hold off;
 
 
-%% Note 4: We need to convert these raw spectrophotometer light energy
+%% ------------------ Estimation of Reflectance Curves -----------------------------------
+%% We need to convert these raw spectrophotometer light energy
 %% measurements into % percent reflectance for each color. Let's make each curve
-%% relative to the direct light measurement and call that percent reflectance.
+%% relative to the 'white' paint measurement and call that percent reflectance.
 
 %% We'll put the reflectance curves into a matrix called
 %% R that will be exactly the same size as Mi (wavelength in rows, measurements/reflectance in columns).
@@ -112,20 +113,19 @@ hold off;
 
 R = Mi;   % make a copy of the interpolated measurements
 %% now go through by each illuminant light bulb:
-%% GrowLight 
-p = R(:,60);
+p = R(:,64);   % the 'white' paint reference
 for i = 1:13    %% all the GrowLight measurements...
   R(:,i) = R(:,i) ./ p;
 end
-p = R(:,61);
+p = R(:,65);
 for i = 14:25    %% all the incandescent measurements...
   R(:,i) = R(:,i) ./ p;
 end
-p = R(:,62);
+p = R(:,66);
 for i = 26:38    %% all the LED measurements...
   R(:,i) = R(:,i) ./ p;
 end
-p = R(:,63);
+p = R(:,67);
 for i = 39:59    %% all the xenon measurements...
   R(:,i) = R(:,i) ./ p;
 end
