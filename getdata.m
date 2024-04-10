@@ -64,7 +64,7 @@ xlabel('Wavelength (nm)');
 ylabel('Intensity');
 title('Light sources reflected by paper');
 set(gca);
-legend(measurement{60:63}, 'northwest')
+legend(measurement{60:63}, 'northwest');
 
 
 %% Note 3: Let's look at all the colors we measured under one light source, the xenon lamp.
@@ -113,19 +113,19 @@ hold off;
 
 R = Mi;   % make a copy of the interpolated measurements
 %% now go through by each illuminant light bulb:
-p = R(:,64);   % the 'white' paint reference
+p = R(:,64);    %% the GrowLight white paint reference
 for i = 1:13    %% all the GrowLight measurements...
   R(:,i) = R(:,i) ./ p;
 end
-p = R(:,65);
+p = R(:,65);     %% the incandescent white paint reference
 for i = 14:25    %% all the incandescent measurements...
   R(:,i) = R(:,i) ./ p;
 end
-p = R(:,66);
+p = R(:,66);     %% the LED white paint reference
 for i = 26:38    %% all the LED measurements...
   R(:,i) = R(:,i) ./ p;
 end
-p = R(:,67);
+p = R(:,67);   %% the xenon white paint reference
 for i = 39:59    %% all the xenon measurements...
   R(:,i) = R(:,i) ./ p;
 end
