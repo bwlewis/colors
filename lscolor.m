@@ -10,35 +10,11 @@
 
 %% It plots the original curve and estimated mixture,
 %% and returns a vector of pigment concentrations.
-%%
-%% For example to match the pinkish target using the following 11 pigments in columns:
-%% 39 xenon-artminds-blue
-%% 40 xenon-artminds-red
-%% 41 xenon-ArtMinds-yellow
-%% 42 xenon-black
-%% 43 xenon-cray-blue
-%% 45 xenon-crayred
-%% 46 xenon-crayyellow
-%% 47 xenon-green
-%% 49 xenon-pink
-%% 50 xenon-purple
-%% 59 xenon-white
-
-%% The xenon-lamp illuminated target colors are in columns:
-%% 51  xenon-target-green
-%% 52  xenon-target-orangish
-%% 53  xenon-target-orangish2
-%% 54  xenon-target-pinkish
-%% 55  xenon-target-purplish
-%% 56  xenon-target-purplish2
-%% 57  xenon-target-rocketred
-%% 58  xenon-target-yellow
-
 
 %% the function call is something like:
 
-% i = [39,40,41,42,43,45,46,47,49,50,59];
-% lscolor(R(:,54),  R(:,i), w, measurement(i));   %% match 'pinkish' color
+% getdata2
+% lscolor(R(:,1:11), R(:,12) w, measurement);   %% match 'green' color using all paints
 
 function x = lscolor(r, P, w, n)
 

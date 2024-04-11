@@ -54,58 +54,11 @@ for i = 1:length(measurement)
   Mi = [Mi, interp1(wavelengths, M(:,i), w)];
 end
 
-%% Note 2: We can plot the measurements now easily. For example, here are the indices of the measurements of
-%% just the new direct lighting:
-%% 60 GrowLight, 61 incandescent, 62, LED, 63 xenon.
-%% Let's plot them:
-
-plot(w, Mi(:,60), w, Mi(:,61), w, Mi(:,62), w, Mi(:,63), 'LineWidth', 2);
-xlabel('Wavelength (nm)');
-ylabel('Intensity');
-title('Light sources reflected by paper');
-set(gca);
-legend(measurement{60:63}, 'northwest');
-
-
-%% Note 3: Let's look at all the colors we measured under one light source, the xenon lamp.
-%% Those measurements are in the following columns:
-%% 39 = xenon-artminds-blue
-%% 40 = xenon-artminds-red
-%% 41 = xenon-ArtMinds-yellow
-%% 42 = xenon-black
-%% 43 = xenon-cray-blue
-%% 44 = xenon-cray-blue2
-%% 45 = xenon-crayred
-%% 46 = xenon-crayyellow
-%% 47 = xenon-green
-%% 49 = xenon-pink
-%% 50 = xenon-purple
-%% 51 = xenon-target-green
-%% 52 = xenon-target-orangish
-%% 53 = xenon-target-orangish2
-%% 54 = xenon-target-pinkish
-%% 55 = xenon-target-purplish
-%% 56 = xenon-target-purplish2
-%% 57 = xenon-target-rocketred
-%% 58 = xenon-target-yellow
-%% 59 = xenon-white
-
-%% Let's see!  -- The color spectra are all really different!
-plot(w, Mi(:,39));
-hold on;
-for i=39:47
-  plot(w, Mi(:,i));
-end
-for i=49:49
-  plot(w, Mi(:,i));
-end
-hold off;
-
 
 %% ------------------ Estimation of Reflectance Curves -----------------------------------
 %% We need to convert these raw spectrophotometer light energy
 %% measurements into % percent reflectance for each color. Let's make each curve
-%% relative to the 'white' paint measurement and call that percent reflectance.
+%% relative to the max reflectance paint measurement and call that percent reflectance.
 
 %% We'll put the reflectance curves into a matrix called
 %% R that will be exactly the same size as Mi (wavelength in rows, measurements/reflectance in columns).
@@ -113,31 +66,19 @@ hold off;
 
 R = Mi;   % make a copy of the interpolated measurements
 %% now go through by each illuminant light bulb:
-p = R(:,64);    %% the GrowLight white paint reference
+p = max(Mi(:,1:13), [], 2);    %% the GrowLight max reflectance paint reference
 for i = 1:13    %% all the GrowLight measurements...
   R(:,i) = R(:,i) ./ p;
 end
-p = R(:,65);     %% the incandescent white paint reference
+p = max(Mi(:,14:25),[],2);     %% the incandescent reference
 for i = 14:25    %% all the incandescent measurements...
   R(:,i) = R(:,i) ./ p;
 end
-p = R(:,66);     %% the LED white paint reference
+p = max(Mi(:,26:38),[],2);     %% the LED  reference
 for i = 26:38    %% all the LED measurements...
   R(:,i) = R(:,i) ./ p;
 end
-p = R(:,67);   %% the xenon white paint reference
+p = max(Mi(:,39:59),[],2);   %% the xenon  reference
 for i = 39:59    %% all the xenon measurements...
   R(:,i) = R(:,i) ./ p;
 end
-
-
-%% EXERCISE 1:   Write a MATLAB program that uses
-%%   a) "reflectance" values in the matrix R
-%%   b) THE CIE x,y,z VALUES IN THE MATRIX CIE  (columns 2,3,4)
-%%   c) The 'white' paint power values in the matrix Mi for each illuminant (columns 59,38,25,13)
-%% and the numerical integration formula for CIE X,Y,Z in our notes to compute CIE X,Y,Z values for each
-%% color and each illuminant.
-%% You are free to use any interpolation rule you like.
-
-
-
