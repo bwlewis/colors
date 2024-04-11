@@ -66,19 +66,19 @@ end
 
 R = Mi;   % make a copy of the interpolated measurements
 %% now go through by each illuminant light bulb:
-p = max(Mi(:,1:13), [], 2);    %% the GrowLight max reflectance paint reference
-for i = 1:13    %% all the GrowLight measurements...
+p = max(Mi(:,1:12), [], 2);    %% the GrowLight max reflectance paint reference
+for i = 1:12    %% all the GrowLight measurements...
   R(:,i) = R(:,i) ./ p;
 end
-p = max(Mi(:,14:25),[],2);     %% the incandescent reference
-for i = 14:25    %% all the incandescent measurements...
+p = max(Mi(:,13:23),[],2);     %% the incandescent reference
+for i = 13:23    %% all the incandescent measurements...
   R(:,i) = R(:,i) ./ p;
 end
-p = max(Mi(:,26:38),[],2);     %% the LED  reference
-for i = 26:38    %% all the LED measurements...
+p = max(Mi(:,24:35),[],2);     %% the LED  reference
+for i = 24:35    %% all the LED measurements...
   R(:,i) = R(:,i) ./ p;
 end
-p = max(Mi(:,39:59),[],2);   %% the xenon  reference
-for i = 39:59    %% all the xenon measurements...
+p = max(Mi(:,36:55),[],2);   %% the xenon  reference
+for i = 36:55    %% all the xenon measurements...
   R(:,i) = R(:,i) ./ p;
 end
