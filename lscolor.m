@@ -37,11 +37,8 @@
 
 %% the function call is something like:
 
-%% pinkish = R(:,54);
-%% i = [39,40,41,42,43,45,46,47,49,50,59];
-%% xenon_pigments = R(:,i);
-%% names = measurement(i);
-%% mix = lscolor(pinkish,  xenon_pigments, w, names)
+% i = [39,40,41,42,43,45,46,47,49,50,59];
+% lscolor(R(:,54),  R(:,i), w, measurement(i));   %% match 'pinkish' color
 
 function x = lscolor(r, P, w, n)
 
